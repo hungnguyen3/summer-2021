@@ -38,23 +38,24 @@ app.get('/createdb', (req: any, res: any) => {
 });
 
 // Create table
-app.get('/createpoststable', (req: any, res: any) => {
-	let sql =
-		'CREATE TABLE posts(id int AUTO_INCREMENT, title VARCHAR(255), body VARCHAR(255), PRIMARY KEY(id))';
+app.post('/createtable', (req: any, res: any) => {
+	console.log(req.body.table_name);
+	let sql = `CREATE TABLE ${req.body.table_name}(id int AUTO_INCREMENT, title VARCHAR(255), body VARCHAR(255), PRIMARY KEY(id))`;
+	console.log(sql);
 	db.query(sql, (err: any, result: any) => {
 		if (err) throw err;
 		console.log(result);
-		res.send('Posts table created');
+		res.send(`${req.body.table_name} table created`);
 	});
 });
 
 // Delete table
-app.get('/droppoststable', (req: any, res: any) => {
-	let sql = 'DROP TABLE posts';
+app.delete('/droptable', (req: any, res: any) => {
+	let sql = `DROP TABLE ${req.body.table_name}`;
 	db.query(sql, (err: any, result: any) => {
 		if (err) throw err;
 		console.log(result);
-		res.send('Posts table deleted');
+		res.send(`${req.body.table_name} table deleted`);
 	});
 });
 
