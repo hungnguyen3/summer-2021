@@ -21,6 +21,10 @@ db.connect((err: any) => {
 
 const app = express();
 
+app.listen('3000', () => {
+	console.log('server started on port 3000');
+});
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -81,6 +85,12 @@ app.get('/getposts', (req: any, res: any) => {
 	});
 });
 
-app.listen('3000', () => {
-	console.log('server started on port 3000');
+// Update a row
+app.post('/updatepost', (req: any, res: any) => {
+	let sql = "UPDATE posts SET title = 'hello', body = 'world' WHERE id = 1";
+	let query = db.query(sql, (err: any, result: any) => {
+		if (err) throw err;
+		console.log(result);
+		res.send('row updated');
+	});
 });
