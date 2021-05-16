@@ -85,12 +85,32 @@ app.get('/getposts', (req: any, res: any) => {
 	});
 });
 
-// Update a row
+// Select 1 post
+app.get('/getpost/:id', (req: any, res: any) => {
+	let sql = `SELECT * FROM posts WHERE id = ${req.params.id}`;
+	let query = db.query(sql, (err: any, result: any) => {
+		if (err) throw err;
+		console.log(result);
+		res.send(`get a post of id ${req.params.id}`);
+	});
+});
+
+// Update a post
 app.post('/updatepost', (req: any, res: any) => {
 	let sql = "UPDATE posts SET title = 'hello', body = 'world' WHERE id = 1";
 	let query = db.query(sql, (err: any, result: any) => {
 		if (err) throw err;
 		console.log(result);
 		res.send('row updated');
+	});
+});
+
+// Delete a post
+app.delete('/deletepost/:id', (req: any, res: any) => {
+	let sql = `DELETE FROM posts WHERE id = ${req.params.id}`;
+	let query = db.query(sql, (err: any, result: any) => {
+		if (err) throw err;
+		console.log(result);
+		res.send(`delete a post of id ${req.params.id}`);
 	});
 });
