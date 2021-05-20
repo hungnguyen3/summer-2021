@@ -19,3 +19,9 @@ db.once('open', (err: any) => {
 db.on('error', (err: any) => {
 	console.error('connection error:', err);
 });
+
+// Import routes
+const postsRoute = require('../routes/posts');
+
+// Use the middleware imported - Routes
+app.use('/posts', postsRoute);
