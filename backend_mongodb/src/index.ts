@@ -1,27 +1,21 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 require('dotenv').config();
 
-app.listen(4000, () => console.log('server started'));
+import db from '../db/database';
 
-mongoose.connect(process.env.MONGO_URL, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
-
-// check connection
-const db = mongoose.connection;
-db.once('open', (err: any) => {
-	console.log('MongoDB Database connected!');
-});
-
-db.on('error', (err: any) => {
-	console.error('connection error:', err);
-});
+const port = 4000;
 
 // Import routes
 const postsRoute = require('../routes/posts');
 
 // Use the middleware imported - Routes
 app.use('/posts', postsRoute);
+
+// start server
+app.listen(port, () => console.log(`LISTENING on ${port}`));
+
+// connect to db
+db.once('open', () => {
+	console.log('MongoDB Database connected!');
+});
