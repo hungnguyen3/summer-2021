@@ -13,8 +13,9 @@ router.get('/specific', (req: any, res: any) => {
 });
 
 // create a post
-router.post('/', (req: any, res: any) => {
+router.post('/createpost', (req: any, res: any) => {
 	console.log(req.body);
+	res.send('create a post');
 });
 
 // export router

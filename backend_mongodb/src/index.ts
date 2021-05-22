@@ -1,10 +1,17 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const bodyParser = require('body-parser');
 
 import db from '../db/database';
 
-const port = 4000;
+const port = 3000;
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 // Import routes
 const postsRoute = require('../routes/posts');
