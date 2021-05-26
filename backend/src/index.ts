@@ -21,8 +21,8 @@ db.connect((err: any) => {
 
 const app = express();
 
-app.listen('3000', () => {
-	console.log('server started on port 3000');
+app.listen('7000', () => {
+	console.log('server started on port 7000');
 });
 
 // parse application/x-www-form-urlencoded
