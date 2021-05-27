@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import CuteCat from './components/CuteCat'
-import CuteDog from './components/CuteDog'
+import CutePet from './components/CutePet';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
-		<CuteCat/>
-		<CuteDog/>
+		<CutePet pet_type="dog" />
+		<CutePet pet_type="cat" />
 	</React.StrictMode>,
 	document.getElementById('root')
 );
